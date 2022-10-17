@@ -10,6 +10,11 @@ namespace TodoAPI.Data
 
         public DbSet<TodoItem> TodoItems { get; set; } = null;
         public DbSet<TodoItemDTO> TodoItemsDTO{ get; set; } = null;
+ //       public DbSet<TodoItemAdd> TodoItemsAdd { get; set; } = null;
+
+
+
+
 
     }
 }
