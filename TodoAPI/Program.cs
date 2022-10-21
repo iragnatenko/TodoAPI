@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -9,8 +10,11 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
+// adding MediatR
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+
 //  applies a CORS policy to all the app's endpoints with the specified origins
-builder.Services.AddCors(options =>
+/*builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
@@ -21,6 +25,7 @@ builder.Services.AddCors(options =>
                                               .AllowAnyMethod();
                       });
 });
+*/
 
 // DI container
 // Add services to the container.
@@ -56,7 +61,7 @@ builder.Services.AddSwaggerGen(options =>
             Url = new Uri("https://example.com/license")
         }
     });
-    // Adding XML comments
+    // Set the comments path for the Swagger JSON and UI.
     // e.g. for POST metod: Creates a TodoItem
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));

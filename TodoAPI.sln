@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoAPI", "TodoAPI\TodoAPI.csproj", "{600991A1-B79D-4D3F-9817-D0803984EB14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoAPI", "TodoAPI\TodoAPI.csproj", "{600991A1-B79D-4D3F-9817-D0803984EB14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoAPIMediatr", "TodoAPIMediatr\TodoAPIMediatr.csproj", "{F496DFEE-25A5-4C3D-92E0-91A1838666C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{600991A1-B79D-4D3F-9817-D0803984EB14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{600991A1-B79D-4D3F-9817-D0803984EB14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{600991A1-B79D-4D3F-9817-D0803984EB14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F496DFEE-25A5-4C3D-92E0-91A1838666C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F496DFEE-25A5-4C3D-92E0-91A1838666C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F496DFEE-25A5-4C3D-92E0-91A1838666C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F496DFEE-25A5-4C3D-92E0-91A1838666C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

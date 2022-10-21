@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TodoAPI.Model
-{    public class TodoItem
+namespace TodoAPIMediatr.Model
+{
+    public class TodoItem
     {
         public long Id { get; set; }
         public string? Name { get; set; }
