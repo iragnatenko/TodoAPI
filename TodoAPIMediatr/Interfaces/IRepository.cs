@@ -7,8 +7,9 @@ namespace TodoAPIMediatr.Interfaces
         public List<TodoItemEntity> GetAllItems();
         public TodoItemEntity GetById(long id);
         public long AddItem(TodoItemEntity todoItem);
-        public TodoItemEntity UpdateItem(long id, TodoItemEntity item);
-        Task<bool> DeleteItem(long id);
+        public TodoItemEntity UpdateItem(TodoItemEntity item);
+        public bool DeleteItem(long id);
+        public bool CheckTodo(long id);
 
     }
 }

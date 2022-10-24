@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Net.Mime;
 using TodoAPIMediatr.CQRS.Commands;
 using TodoAPIMediatr.CQRS.Queries;
@@ -77,7 +78,7 @@ namespace TodoAPIMediatr.Controllers
         {
             try
             {
-                var ret = await _mediator.Send(new TodoAddCommand() { todoItem  = todoItem });
+                var ret = await _mediator.Send(new TodoItemAddCommand() { todoItem  = todoItem });
                 return CreatedAtRoute("todogetbyid", new { id = ret.Id }, ret);
             }
             catch (Exception ex)
@@ -86,6 +87,76 @@ namespace TodoAPIMediatr.Controllers
                 throw;
             }
         }
+
+        // PUT api/todo/5
+        /// <summary>
+        /// Update a todo item
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="todoItem"></param>
+        /// <returns>Updated todo item</returns>
+        [HttpPut("{id}", Name = "todoupdate")]
+        [ProducesResponseType(typeof(TodoItem), StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<TodoItem>> Put(int id, AddTodoItem todoItem)
+        {
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                var updatedTodo = await _mediator.Send(new TodoItemUpdateCommand() { Id = id, todoItem = todoItem });
+                return Accepted(updatedTodo);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!await TodoItemExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+
+        }
+
+        // DELETE api/todo/5
+        /// <summary>
+        /// Delete a todo item by id
+        /// </summary>
+        /// <param name="id">Id of todo item to delete</param>
+        /// <returns>true or false</returns>
+        [HttpDelete("{id}", Name = "tododelete")]
+        [ProducesResponseType(typeof(TodoItem), StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<int>> Delete(int id)
+        {
+            try
+            {
+                var ret = await _mediator.Send(new TodoItemDeleteCommand() { Id = id });
+                return Accepted(await Task.FromResult(id));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
+        private async Task<bool> TodoItemExists(long id)
+        {
+            return await _mediator.Send(new CheckTodoItemExistQuery() { Id = id });
+        }
+
+
+
 
 
     }

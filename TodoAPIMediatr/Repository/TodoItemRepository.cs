@@ -1,4 +1,5 @@
-﻿using TodoAPIMediatr.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using TodoAPIMediatr.Entity;
 using TodoAPIMediatr.Helpers;
 using TodoAPIMediatr.Interfaces;
 
@@ -56,17 +57,48 @@ namespace TodoAPIMediatr.Repository
             }
         }
 
-        public Task<bool> DeleteItem(long id)
+        public TodoItemEntity UpdateItem(TodoItemEntity item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dbContext.Entry(item).State = EntityState.Modified;
+                _dbContext.SaveChanges();
+                return item;
+            }
+            catch
+            {
+                throw;
+            }
         }
 
-        public TodoItemEntity UpdateItem(long id, TodoItemEntity item)
+        public bool DeleteItem(long id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                TodoItemEntity? todo = _dbContext.TodoItems.Find(id);
+
+                if (todo != null)
+                {
+                    _dbContext.TodoItems.Remove(todo);
+                    _dbContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    throw new ArgumentNullException();
+                }
+            }
+            catch
+            {
+                throw;
+            }
         }
 
-
+        public bool CheckTodo(long id)
+        {
+            return _dbContext.TodoItems.Any(e => e.Id == id);
+        }
+    
     }
 
 }

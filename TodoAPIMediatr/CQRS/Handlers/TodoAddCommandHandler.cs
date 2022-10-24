@@ -7,7 +7,7 @@ using TodoAPIMediatr.Converter;
 
 namespace TodoAPIMediatr.CQRS.Handlers
 {
-    public class TodoAddCommandHandler : IRequestHandler<TodoAddCommand, TodoItemEntity>
+    public class TodoAddCommandHandler : IRequestHandler<TodoItemAddCommand, TodoItemEntity>
     {
         private IRepository _repository {get; set; } = default!;
 
@@ -16,7 +16,7 @@ namespace TodoAPIMediatr.CQRS.Handlers
             _repository = repository;
         }
 
-        public async Task<TodoItemEntity> Handle(TodoAddCommand request, CancellationToken cancellationToken)
+        public async Task<TodoItemEntity> Handle(TodoItemAddCommand request, CancellationToken cancellationToken)
         {
             try
             {
