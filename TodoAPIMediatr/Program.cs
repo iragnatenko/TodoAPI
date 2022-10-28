@@ -18,7 +18,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddScoped<IRepository, TodoItemRepository>();
-
+builder.Services.AddScoped<IFileRepository, FileRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 
