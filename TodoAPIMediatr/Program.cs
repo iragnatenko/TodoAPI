@@ -17,6 +17,7 @@ builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TodoList") ?? throw new InvalidOperationException("Connection string 'TodoList' not found.")));
 // builder.Services.AddTransient<IRepository, TodoItemRepository>();
+
 // DI container
 // Add services to the container.
 builder.Services.AddControllers();

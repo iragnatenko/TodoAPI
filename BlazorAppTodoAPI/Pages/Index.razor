@@ -1,0 +1,47 @@
+﻿@page "/"
+
+@inherits Code.IndexBase
+
+<PageTitle>Index</PageTitle>
+
+<EditForm EditContext="@editctx" >
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="row">
+        <label for="@model.Id">Id:</label>
+        <InputNumber @bind-Value="@model.Id" ></InputNumber>
+    </div>
+    <div class="row">
+
+    </div>
+</EditForm>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>IsComplete</th>
+            <th>Secret</th>
+        </tr>
+    </thead>
+    @if (IsLoading)
+    {
+        <div>Loading data...</div>
+    }
+    else
+    {
+        <tbody>
+
+            @foreach (var e in TodoItems)
+            {
+                <tr>
+                    <td><a href="" onclick="@(() => SetId(@e.Id))" @onclick:preventDefault>@e.Id</a></td>
+                    <td>@e.Name</td>
+                    <td>@e.IsComplete</td>
+                    <td>@e.Secret</td>
+                </tr>
+            }
+        </tbody>
+    }
+</table>
